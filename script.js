@@ -8,6 +8,45 @@ var numericChars = ["1", "2", "3", "4", "5"];
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
+// Write password to the #password input
+function writePassword() {
+    var password = generatePassword();
+    var passwordText = document.getElementById("password");
+    console.log(passwordText.value);
+    passwordText.value = password;
+  }
+  // write a funciton to generate password
+function generatePassword() {
+    var criteria = getCriteria();
+    var possibleChar = []
+    if (criteria.lowerCase === true) {
+        possibleChar = possibleChar.concat(lowerChars)
+        // console.log(possibleChar)
+    }
+    if (criteria.upperCase === true) {
+        possibleChar = possibleChar.concat(upperChars)
+        // console.log(possibleChar)
+    }
+    if (criteria.specialCharacters === true) {
+        possibleChar = possibleChar.concat(specialChars)
+        // console.log(possibleChar)
+    }
+    if (criteria.numerics === true) {
+        possibleChar = possibleChar.concat(numericChars)
+       // console.log(possibleChar)
+    }
+    // console.log(criteria);
+    var pw = []
+    // Loop over possible characters array length number of times and grab random index, then push into pw array
+    for(var i = 0; i < criteria.length; i ++) {
+        // create variable to get random index from array
+        var random = Math.floor(Math.random() * possibleChar.length);
+        // console.log(possibleChar[random]);
+        pw.push(possibleChar[random]);
+        // console.log(pw);
+    }
+    return pw;
+}
 // Write a function to get user preferences
 function getCriteria() {
     var length = prompt("How many characters: 8-128?");
@@ -20,7 +59,7 @@ function getCriteria() {
     var upperCase = confirm ("Would you like upper case characters? 'Ok' for YES, 'Cancel' for NO");
     var specialCharacters = confirm ("Would you like special characters? 'Ok' for YES, 'Cancel' for NO");
     var numerics = confirm ("Would you like numbers? 'Ok' for YES, 'Cancel' for NO");
-    console.log(lowerCase);
+    // console.log(lowerCase);
     var preferences = {
         length: length,
         lowerCase: lowerCase,
@@ -29,47 +68,6 @@ function getCriteria() {
         numerics: numerics,
     }
     return preferences;
-}
-// write a funciton to generate password
-function generatePassword() {
-    var criteria = getCriteria();
-    var possibleChar = []
-    if (criteria.lowerCase === true) {
-        possibleChar = possibleChar.concat(lowerChars)
-        console.log(possibleChar)
-    }
-    if (criteria.upperCase === true) {
-        possibleChar = possibleChar.concat(upperChars)
-        console.log(possibleChar)
-    }
-    if (criteria.specialCharacters === true) {
-        possibleChar = possibleChar.concat(specialChars)
-        console.log(possibleChar)
-    }
-    if (criteria.numerics === true) {
-        possibleChar = possibleChar.concat(numericChars)
-        console.log(possibleChar)
-    }
-    console.log(criteria);
-    var pw = []
-    // Loop over possible characters array length number of times and grab random index, then push into pw array
-    for(var i = 0; i < criteria.length; i ++) {
-        // create variable to get random index from array
-        var random = Math.floor(Math.random() * possibleChar.length);
-        console.log(possibleChar[random]);
-        pw.push(possibleChar[random]);
-        console.log(pw);
-    }
-    return pw;
-}
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
 }
 
 // Add event listener to generate button
