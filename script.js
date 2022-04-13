@@ -1,8 +1,8 @@
 // Variables for characters
-var lowerChars = ["a", "b", "c", "d", "e"];
-var upperChars = ["A", "B", "C", "D", "E"];
-var specialChars = ["!", "@", "#", "$", "%"];
-var numericChars = ["1", "2", "3", "4", "5"];
+var lowerChars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var upperChars = ["A", "B", "C", "D", "E", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var specialChars = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_"];
+var numericChars = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
 
 // Get references to the #generate element
@@ -11,9 +11,8 @@ var generateBtn = document.querySelector("#generate");
 // Write password to the #password input
 function writePassword() {
     var password = generatePassword();
-    var passwordText = document.getElementById("password");
-    console.log(passwordText.value);
-    passwordText.value = password;
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password.join('');
   }
   // write a funciton to generate password
 function generatePassword() {
@@ -34,6 +33,13 @@ function generatePassword() {
     if (criteria.numerics === true) {
         possibleChar = possibleChar.concat(numericChars)
        // console.log(possibleChar)
+    }
+    if (criteria.lowerCase === false && 
+        criteria.upperCase === false && 
+        criteria.specialCharacters === false && 
+        criteria.numerics === false) 
+    {
+        alert("You must select 'OK' to one of the previous questions.")
     }
     // console.log(criteria);
     var pw = []
